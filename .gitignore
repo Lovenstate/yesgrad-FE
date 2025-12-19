@@ -10,6 +10,12 @@
 !.yarn/releases
 !.yarn/versions
 
+*.md
+*.MD
+
+/.github
+/.vscode
+
 # testing
 /coverage
 
