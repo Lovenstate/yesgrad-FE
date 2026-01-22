@@ -4,6 +4,7 @@ import ChatWidget from "@/components/ChatWidget";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
+import QueryProvider from "@/providers/query-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
       > <Header />
+      <QueryProvider>
         {children}
+        </QueryProvider>
         <ChatWidget />
         <Footer />
               </body>

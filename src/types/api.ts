@@ -4,7 +4,11 @@ export interface ApiResponse<T> {
   message: string;
   data: T;
   timestamp: string;
-  error: string | null;
+  error: {
+    code: string;
+    message: string;
+    details: any;
+  } | null;
 }
 
 // User roles
@@ -75,4 +79,21 @@ export interface Availability {
   startTime: string;
   endTime: string;
   isAvailable: boolean;
+}
+
+export interface TutorCompleteSettings {
+  email?: string
+  phone?: string
+  bio?: string
+  instantBook?: boolean
+  responseTime?: number
+  emailNotifications?: boolean
+  smsNotifications?: boolean
+  lessonReminders?: boolean
+  paymentMethod?: string
+  payoutFrequency?: string
+  passwordChanged?: boolean
+  currentPassword?: string
+  newPassword?: string
+  confirmPassword?: string
 }

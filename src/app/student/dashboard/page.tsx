@@ -27,7 +27,7 @@ export default function StudentDashboard() {
           <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 text-amber-600" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </div>
@@ -46,21 +46,21 @@ export default function StudentDashboard() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Upcoming Sessions</h3>
-            <p className="text-3xl font-bold text-blue-600">2</p>
+            <p className="text-3xl font-bold text-amber-600">2</p>
             <p className="text-sm text-gray-500">Next: Today 3:00 PM</p>
           </div>
           
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Total Hours</h3>
-            <p className="text-3xl font-bold text-green-600">24</p>
+            <p className="text-3xl font-bold text-emerald-600">24</p>
             <p className="text-sm text-gray-500">This month</p>
           </div>
           
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Active Tutors</h3>
-            <p className="text-3xl font-bold text-purple-600">3</p>
+            <p className="text-3xl font-bold text-orange-600">3</p>
             <p className="text-sm text-gray-500">Math, Science, English</p>
           </div>
         </div>
@@ -74,12 +74,12 @@ export default function StudentDashboard() {
               {upcomingSessions.length > 0 ? (
                 <div className="space-y-4">
                   {upcomingSessions.map(session => (
-                    <div key={session.id} className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div key={session.id} className="flex items-center justify-between p-4 bg-amber-50 rounded-lg border border-amber-200 hover:shadow-md transition-shadow">
                       <div>
                         <p className="font-medium">{session.subject} with {session.tutor}</p>
                         <p className="text-sm text-gray-600">{session.date}, {session.time}</p>
                       </div>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm capitalize">{session.status}</span>
+                      <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm capitalize">{session.status}</span>
                     </div>
                   ))}
                 </div>
@@ -94,7 +94,7 @@ export default function StudentDashboard() {
               
               <Link 
                 href="/student/sessions" 
-                className="block mt-4 text-center text-blue-600 hover:text-blue-700 font-medium"
+                className="block mt-4 text-center text-amber-600 hover:text-amber-700 font-medium"
               >
                 View All Sessions
               </Link>
@@ -160,7 +160,7 @@ export default function StudentDashboard() {
                   <p className="font-medium">Math with Sarah Johnson</p>
                   <p className="text-sm text-gray-500">Yesterday, 2:00 PM - 3:00 PM</p>
                 </div>
-                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Completed</span>
+                <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">Completed</span>
               </div>
               
               <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">

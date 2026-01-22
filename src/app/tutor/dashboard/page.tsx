@@ -31,7 +31,7 @@ export default function TutorDashboard() {
                 <span>•</span>
                 <span>{tutor.rating} ({tutor.ratingCount} ratings)</span>
               </div>
-              <Link href="/tutor/profile" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              <Link href="/tutor/profile" className="text-amber-600 hover:text-amber-700 text-sm font-medium">
                 View public profile →
               </Link>
             </div>
@@ -39,7 +39,7 @@ export default function TutorDashboard() {
               <div className="bg-green-50 border border-green-200 rounded-md px-3 py-2 mb-2">
                 <span className="text-green-800 text-sm font-medium">Students love Instant Book</span>
               </div>
-              <Link href="/tutor/settings" className="text-blue-600 hover:text-blue-800 text-sm">
+              <Link href="/tutor/settings" className="text-amber-600 hover:text-amber-700 text-sm">
                 Update your settings
               </Link>
             </div>
@@ -48,17 +48,17 @@ export default function TutorDashboard() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-          <Link href="/tutor/schedule" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-gray-50 transition-colors">
-            <div className="text-blue-600 font-medium text-sm">Schedule lesson</div>
+          <Link href="/tutor/schedule" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-amber-50 hover:border-amber-200 transition-colors">
+            <div className="text-amber-600 font-medium text-sm">Schedule lesson</div>
           </Link>
-          <Link href="/tutor/submit" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-gray-50 transition-colors">
-            <div className="text-blue-600 font-medium text-sm">Submit lesson</div>
+          <Link href="/tutor/submit" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-amber-50 hover:border-amber-200 transition-colors">
+            <div className="text-amber-600 font-medium text-sm">Submit lesson</div>
           </Link>
-          <Link href="/tutor/messages" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-gray-50 transition-colors">
-            <div className="text-blue-600 font-medium text-sm">Messages</div>
+          <Link href="/tutor/messages" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-amber-50 hover:border-amber-200 transition-colors">
+            <div className="text-amber-600 font-medium text-sm">Messages</div>
           </Link>
-          <Link href="/tutor/jobs" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-gray-50 transition-colors">
-            <div className="text-blue-600 font-medium text-sm">Jobs board</div>
+          <Link href="/tutor/jobs" className="bg-white border border-gray-200 p-3 rounded-md text-center hover:bg-amber-50 hover:border-amber-200 transition-colors">
+            <div className="text-amber-600 font-medium text-sm">Jobs board</div>
           </Link>
         </div>
 
@@ -75,7 +75,7 @@ export default function TutorDashboard() {
                 <h3 className="text-sm font-medium text-yellow-800">Complete your account now by adding your direct deposit details.</h3>
                 <p className="mt-1 text-sm text-yellow-700">Tutors are paid through direct deposit. Direct deposits are processed on the 1st and 15th of each month, excluding weekends and holidays.</p>
                 <div className="mt-3">
-                  <Link href="/tutor/payment-settings" className="bg-yellow-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-yellow-700">
+                  <Link href="/tutor/payment-settings" className="bg-amber-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-amber-700 transition-colors">
                     Add details now
                   </Link>
                 </div>
@@ -92,7 +92,7 @@ export default function TutorDashboard() {
             </div>
             <div className="p-4">
               <p className="text-sm text-gray-600 mb-3">When students contact you, they'll expect a prompt response. Top tutors respond in 1 hour or less.</p>
-              <Link href="/tutor/tips" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              <Link href="/tutor/tips" className="text-amber-600 hover:text-amber-700 text-sm font-medium">
                 More tips to succeed →
               </Link>
               
@@ -124,7 +124,7 @@ export default function TutorDashboard() {
             </div>
             <div className="p-4">
               <div className="mb-3">
-                <Link href="/tutor/schedule" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                <Link href="/tutor/schedule" className="text-amber-600 hover:text-amber-700 text-sm font-medium">
                   Schedule a lesson
                 </Link>
               </div>
@@ -132,7 +132,7 @@ export default function TutorDashboard() {
                 <h4 className="font-medium text-gray-900 mb-2">Scheduled lessons</h4>
                 <p className="text-gray-600 mb-3">No scheduled lessons</p>
                 <p className="text-xs text-gray-500 mb-3">Schedule upcoming lessons to automatically send your students lesson reminders and easily keep track of payments.</p>
-                <Link href="/tutor/jobs" className="text-blue-600 hover:text-blue-800 text-xs">
+                <Link href="/tutor/jobs" className="text-amber-600 hover:text-amber-700 text-xs">
                   Looking for more students? See new jobs in your area ›
                 </Link>
               </div>
@@ -150,7 +150,7 @@ export default function TutorDashboard() {
             <div className="p-4">
               <h4 className="font-medium text-gray-900 mb-2 text-sm">Availability</h4>
               <p className="text-sm text-gray-600 mb-3">Make it easier to find the right students for you. Tell us when you are available for lessons.</p>
-              <Link href="/tutor/availability" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              <Link href="/tutor/availability" className="text-amber-600 hover:text-amber-700 text-sm font-medium">
                 Set your availability
               </Link>
             </div>
@@ -162,7 +162,7 @@ export default function TutorDashboard() {
             </div>
             <div className="p-4">
               <div className="mb-3">
-                <Link href="/tutor/submit" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                <Link href="/tutor/submit" className="text-amber-600 hover:text-amber-700 text-sm font-medium">
                   Submit a lesson
                 </Link>
               </div>
@@ -183,19 +183,19 @@ export default function TutorDashboard() {
           <div className="p-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <p className="text-xl font-bold text-gray-900">${tutor.totalEarnings.toFixed(2)}</p>
+                <p className="text-xl font-bold text-amber-600">${tutor.totalEarnings.toFixed(2)}</p>
                 <p className="text-xs text-gray-600">Total earnings</p>
               </div>
               <div className="text-center">
-                <p className="text-xl font-bold text-green-600">${tutor.amountPaid.toFixed(2)}</p>
+                <p className="text-xl font-bold text-emerald-600">${tutor.amountPaid.toFixed(2)}</p>
                 <p className="text-xs text-gray-600">Amount paid</p>
               </div>
               <div className="text-center">
-                <p className="text-xl font-bold text-blue-600">${tutor.amountOwed.toFixed(2)}</p>
+                <p className="text-xl font-bold text-orange-600">${tutor.amountOwed.toFixed(2)}</p>
                 <p className="text-xs text-gray-600">Amount Owed</p>
               </div>
               <div className="text-center">
-                <p className="text-xl font-bold text-purple-600">{tutor.payPercent}%</p>
+                <p className="text-xl font-bold text-amber-700">{tutor.payPercent}%</p>
                 <p className="text-xs text-gray-600">Pay Percent</p>
               </div>
             </div>

@@ -108,9 +108,6 @@ export default function Header() {
                             <Link href="/tutor/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                               Profile
                             </Link>
-                            <Link href="/tutor/answers" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                              My Answers
-                            </Link>
                             <Link href="/tutor/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                               Settings
                             </Link>

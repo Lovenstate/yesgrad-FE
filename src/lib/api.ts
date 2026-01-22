@@ -5,8 +5,10 @@ import
   LoginResponse, 
   RegisterResponse, 
   TutorProfileResponse, 
-  UserRole 
+  UserRole, 
+  TutorCompleteSettingsResponse
 } from '@/types/api';
+import { verify } from 'crypto';
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
 
@@ -56,8 +58,50 @@ export const authAPI = {
       credentials: 'include',
     });
     return response.json();
-  }
-};
+  },
+
+  async forgotPassword(data: { email: string, ipAddress: string }): Promise<ApiResponse<string>> {
+    const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to send reset email');
+    }
+    
+    return response.json();
+  },
+
+  async verifyResetToken(token: string): Promise<ApiResponse<boolean>> {
+    const response = await fetch(`${API_BASE_URL}/auth/verify-reset-token/${token}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to verify token');
+    }
+
+    return response.json();
+  },
+
+  async resetPassword(data: { token: string; newPassword: string }): Promise<ApiResponse<string>> {
+    const response = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to update password');
+    }
+
+    return response.json();
+  },
+}
 
 export const tutorProfileAPI = {
   async getProfile(): Promise<ApiResponse<TutorProfileResponse>> {
@@ -90,5 +134,24 @@ export const tutorProfileAPI = {
     });
     if (!response.ok) throw new Error('Failed to upload photo');
     return response.json();
-  }
+  },
+
+  async getTutorCompleteSettings(): Promise<ApiResponse<TutorCompleteSettingsResponse>> {
+    const response = await fetch(`${API_BASE_URL}/tutor/profile/complete-settings`, {
+      credentials: 'include',
+    });
+    if (!response.ok) throw new Error('Failed to fetch profile');
+    return response.json();
+  },
+
+  async updateTutorCompleteSettings(data: Partial<TutorCompleteSettingsResponse>): Promise<ApiResponse<TutorCompleteSettingsResponse>> {
+    const response = await fetch(`${API_BASE_URL}/tutor/profile/complete-settings`, {
+       method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(data),
+    });
+    
+    return response.json();
+  },
 };

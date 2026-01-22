@@ -6,7 +6,7 @@ export default function Home() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+        <section className="bg-gradient-to-br from-amber-50 to-orange-100 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
@@ -121,13 +121,13 @@ export default function Home() {
         </section>
 
         {/* Statistics Section */}
-        <section className="bg-blue-600 py-16">
+        <section className="bg-amber-600 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-white mb-4">
                 Trusted by Students Worldwide
               </h2>
-              <p className="text-blue-100 text-lg">
+              <p className="text-amber-100 text-lg">
                 Join thousands of successful learners
               </p>
             </div>
