@@ -17,6 +17,7 @@ export type UserRole = 'STUDENT' | 'TUTOR';
 // Auth responses
 export interface LoginResponse {
   role: UserRole;
+  isFirstLogin: boolean;
 }
 
 export interface RegisterResponse {
@@ -37,12 +38,18 @@ export interface User {
   zipCode?: string;
 }
 
+export type OnboardingStatus = 'STARTED' | 'SKIPPED' | 'FINISHED';
+
 export interface TutorProfileResponse {
   id: number;
   userId: number;
   profilePhotoUrl: string;
   school: string;
   degree: string;
+  bio: string;
+  headLine: string;
+  onboardingStatus: OnboardingStatus;
+  profileCompletion: number;
   fieldOfStudy: string;
   graduationYear: number;
   hourlyRate: number;
@@ -51,6 +58,7 @@ export interface TutorProfileResponse {
   createdAt: string;
   updatedAt: string;
   subjects: string[];
+
   languages: SpeakingLanguages[];
   availability: Availability[];
 }
@@ -58,6 +66,8 @@ export interface TutorProfileResponse {
 export interface TutorProfileRequest {
   school?: string;
   degree?: string;
+  bio?: string;
+  headLine?: string;
   fieldOfStudy?: string;
   graduationYear?: number;
   hourlyRate?: number;
@@ -96,4 +106,19 @@ export interface TutorCompleteSettings {
   currentPassword?: string
   newPassword?: string
   confirmPassword?: string
+}
+
+export interface SubjectNode {
+  id: number;
+  name: string;
+  children: SubjectNode[];
+};
+
+export interface Subject {
+  id: number;
+  slug: string;
+  name: string;
+  parentId: number | null;
+  createdAt: string;
+  updatedAt: string;
 }

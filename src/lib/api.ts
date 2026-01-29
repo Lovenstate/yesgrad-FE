@@ -1,14 +1,14 @@
 import 
 { 
   TutorProfileRequest,
-  ApiResponse,
-  LoginResponse, 
+  ApiResponse, 
   RegisterResponse, 
   TutorProfileResponse, 
-  UserRole, 
-  TutorCompleteSettingsResponse
+  UserRole,
+  SubjectNode,
+  TutorCompleteSettings,
+  Subject
 } from '@/types/api';
-import { verify } from 'crypto';
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
 
@@ -36,7 +36,7 @@ export const authAPI = {
     return response.json();
   },
 
-  async login(data: { email: string; password: string }): Promise<ApiResponse<UserRole>> {
+  async login(data: { email: string; password: string }): Promise<ApiResponse<{ role: UserRole; isFirstLogin: boolean }>> {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -101,6 +101,20 @@ export const authAPI = {
 
     return response.json();
   },
+
+  async verifyEmail(data: {token: string}): Promise<ApiResponse<boolean>> {
+    const response = await fetch(`${API_BASE_URL}/auth/verify-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to update password');
+    }
+
+    return response.json();
+  },
 }
 
 export const tutorProfileAPI = {
@@ -136,7 +150,7 @@ export const tutorProfileAPI = {
     return response.json();
   },
 
-  async getTutorCompleteSettings(): Promise<ApiResponse<TutorCompleteSettingsResponse>> {
+  async getTutorCompleteSettings(): Promise<ApiResponse<TutorCompleteSettings>> {
     const response = await fetch(`${API_BASE_URL}/tutor/profile/complete-settings`, {
       credentials: 'include',
     });
@@ -144,7 +158,7 @@ export const tutorProfileAPI = {
     return response.json();
   },
 
-  async updateTutorCompleteSettings(data: Partial<TutorCompleteSettingsResponse>): Promise<ApiResponse<TutorCompleteSettingsResponse>> {
+  async updateTutorCompleteSettings(data: Partial<TutorCompleteSettings>): Promise<ApiResponse<TutorCompleteSettings>> {
     const response = await fetch(`${API_BASE_URL}/tutor/profile/complete-settings`, {
        method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -155,3 +169,47 @@ export const tutorProfileAPI = {
     return response.json();
   },
 };
+
+export const subjectAPI = {
+  async getAllSubjects(): Promise<ApiResponse<SubjectNode[]>> {
+    const response = await fetch(`${API_BASE_URL}/subjects/tree`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to fetch subjects');
+    }
+
+    return response.json();
+  },
+
+  async getSubjectById(id: string): Promise<ApiResponse<Subject>> {
+    const response = await fetch(`${API_BASE_URL}/subjects/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to fetch subject');
+    }
+
+    return response.json();
+  },
+
+  async getChildrenSubjectByParentId(parentId: string): Promise<ApiResponse<Subject[]>> {
+    const response = await fetch(`${API_BASE_URL}/subjects/${parentId}/children`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to fetch subject');
+    }
+
+    return response.json();
+  }
+}
