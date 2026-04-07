@@ -43,7 +43,7 @@ export default function StudentLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Student Login</h1>
@@ -67,7 +67,7 @@ export default function StudentLogin() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
               placeholder="Enter your email"
             />
           </div>
@@ -82,7 +82,7 @@ export default function StudentLogin() {
               required
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
               placeholder="Enter your password"
             />
           </div>
@@ -100,7 +100,7 @@ export default function StudentLogin() {
                 Remember me
               </label>
             </div>
-            <Link href="/auth/forgot-password" className="text-sm text-blue-600 hover:text-blue-700">
+            <Link href="/auth/forgot-password" className="text-sm text-amber-600 hover:text-amber-700">
               Forgot password?
             </Link>
           </div>
@@ -108,7 +108,7 @@ export default function StudentLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:opacity-50"
+            className="w-full bg-amber-600 text-white py-3 px-4 rounded-md hover:bg-amber-700 transition-colors font-medium disabled:opacity-50"
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
@@ -147,7 +147,7 @@ export default function StudentLogin() {
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Don't have an account?{' '}
-            <Link href="/auth/student/register" className="text-blue-600 hover:text-blue-700 font-medium">
+            <Link href="/auth/student/register" className="text-amber-600 hover:text-amber-700 font-medium">
               Sign up
             </Link>
           </p>

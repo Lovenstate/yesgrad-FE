@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { authAPI } from '@/lib/api';
+import { authAPI, tutorProfileAPI } from '@/lib/api';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -19,17 +19,32 @@ export default function Login() {
     setError('');
 
     try {
-      const result = await authAPI.login({
+      const loginResult = await authAPI.login({
         email: formData.email,
         password: formData.password
       });
       
-      // Redirect based on user role from backend
-      console.log('Login successful:', result);
-      if (result.data === 'TUTOR') {
-        window.location.href = '/tutor/dashboard';
-      } else if (result.data === 'STUDENT') {
-        window.location.href = '/student/dashboard';
+      // Redirect based on user role
+      if (loginResult.data.role === 'TUTOR') {
+        // Fetch tutor profile to check onboarding status
+        const profileResult = await tutorProfileAPI.getProfile();
+        const tutorProfile = profileResult.data;
+        
+        // Store tutor info
+        localStorage.setItem('userId', String(tutorProfile.userId));
+        localStorage.setItem('tutorId', String(tutorProfile.id));
+        localStorage.setItem('onboardingStatus', tutorProfile.onboardingStatus);
+        localStorage.setItem('profileCompletion', String(tutorProfile.profileCompletion));
+        
+        // Check if first login or incomplete profile
+        if (loginResult.data.isFirstLogin) {
+          window.location.href = '/tutor/onboarding';
+        } else {
+          window.location.href = '/tutor/dashboard';
+        }
+      } else if (loginResult.data.role === 'STUDENT') {
+        localStorage.setItem('emailVerified', String(loginResult.data.emailVerified));
+        window.location.href = loginResult.data.isFirstLogin ? '/student/onboarding' : '/student/dashboard';
       } else {
         setError('Unknown user role');
       }
