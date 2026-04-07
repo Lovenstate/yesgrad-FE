@@ -1,14 +1,12 @@
-
 'use client';
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { authAPI } from '@/lib/api';
 import Toast from '@/components/ui/toast';
 import Link from 'next/link';
 
-
-export default function ResetPassword() {
+function ResetPasswordContent() {
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -239,4 +237,12 @@ export default function ResetPassword() {
     </>
   );
 
+}
+
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
+      <ResetPasswordContent />
+    </Suspense>
+  );
 }

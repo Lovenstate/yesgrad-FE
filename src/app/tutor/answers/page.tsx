@@ -1,1 +1,3 @@
-<h1>Building tutor answers</h1>
+export default function TutorAnswersPage() {
+  return null;
+}

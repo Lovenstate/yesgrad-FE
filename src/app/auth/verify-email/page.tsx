@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { authAPI } from "@/lib/api";
 
-export default function VerifyEmail() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
@@ -22,20 +22,16 @@ export default function VerifyEmail() {
 
   const verifyEmail = async (token: string) => {
     try {
-      const response = await authAPI.verifyEmail({token: token})
-
+      const response = await authAPI.verifyEmail({ token });
       if (response.success) {
         setStatus("success");
         setMessage("Email verified successfully!");
-        
-        setTimeout(() => {
-          window.location.href = "/auth/login";
-        }, 2000);
+        setTimeout(() => { window.location.href = "/auth/login"; }, 2000);
       } else {
         setStatus("error");
         setMessage(response.message || "Verification failed");
       }
-    } catch (err) {
+    } catch {
       setStatus("error");
       setMessage("Something went wrong. Please try again.");
     }
@@ -46,12 +42,11 @@ export default function VerifyEmail() {
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
         {status === "loading" && (
           <>
-            <div className="w-16 h-16 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+            <div className="w-16 h-16 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Verifying Your Email</h1>
             <p className="text-gray-600">Please wait...</p>
           </>
         )}
-
         {status === "success" && (
           <>
             <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -64,7 +59,6 @@ export default function VerifyEmail() {
             <p className="text-sm text-gray-500">Redirecting to login...</p>
           </>
         )}
-
         {status === "error" && (
           <>
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -74,15 +68,20 @@ export default function VerifyEmail() {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Verification Failed</h1>
             <p className="text-gray-600 mb-6">{message}</p>
-            <Link
-              href="/auth/login"
-              className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-semibold"
-            >
+            <Link href="/auth/login" className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-semibold">
               Go to Login
             </Link>
           </>
         )}
       </div>
     </div>
+  );
+}
+
+export default function VerifyEmail() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

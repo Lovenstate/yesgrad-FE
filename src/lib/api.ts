@@ -94,7 +94,7 @@ export const authAPI = {
   async login(data: {
     email: string;
     password: string;
-  }): Promise<ApiResponse<{ role: UserRole; isFirstLogin: boolean }>> {
+  }): Promise<ApiResponse<{ role: UserRole; isFirstLogin: boolean; emailVerified: boolean }>> {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

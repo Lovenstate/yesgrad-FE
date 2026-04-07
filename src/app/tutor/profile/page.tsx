@@ -55,14 +55,13 @@ export default function TutorProfile() {
         const availMap: Record<string, { startTime: string; endTime: string; isAvailable: boolean }> = {};
         ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].forEach(day => {
           const dayAvail = data.availability?.find(a => a.dayOfWeek === day);
-          availMap[day] = dayAvail || { startTime: '09:00', endTime: '17:00', isAvailable: false };
+          availMap[day] = dayAvail ? { startTime: dayAvail.startTime, endTime: dayAvail.endTime, isAvailable: dayAvail.isAvailable ?? false } : { startTime: '09:00', endTime: '17:00', isAvailable: false };
         });
         setAvailability(availMap);
 
         // Set photo
         if (data.profilePhotoUrl) {
-          const url = data.profilePhotoUrl.startsWith('http') ? data.profilePhotoUrl : `${API_BASE_URL.replace('/api', '')}${data.profilePhotoUrl}`;
-          setPhotoPreview(url);
+          setPhotoPreview(data.profilePhotoUrl);
         }
         
         setHasChanges(false);
@@ -83,8 +82,7 @@ export default function TutorProfile() {
     try {
       setLoading(true);
       const response = await tutorProfileAPI.uploadPhoto(file);
-      const url = response.data.startsWith('http') ? response.data : `${API_BASE_URL.replace('/api', '')}${response.data}`;
-      setPhotoPreview(url);
+      setPhotoPreview(response.data);
       alert('Photo uploaded successfully!');
     } catch (error) {
       console.error('Failed to upload photo:', error);

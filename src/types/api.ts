@@ -82,7 +82,7 @@ export interface TutorProfileRequest {
 
 
 export interface SpeakingLanguages {
-  id: number;
+  id?: number;
   studentId?: number;
   language: string;
   proficiency: string;
@@ -134,11 +134,16 @@ export interface TutorSubject {
   subjectId: number;
   hourlyRate: number;
   subjectName?: string;
-  createdAt: string;
+  createdAt?: string;
+}
+
+export interface TutorSubjectRequest {
+  subjectId: number;
+  hourlyRate: number;
 }
 
 export interface TutorSubjectsRequest {
-  subjects: TutorSubject[];
+  subjects: TutorSubjectRequest[];
 }
 
 export interface TutorEducation {
