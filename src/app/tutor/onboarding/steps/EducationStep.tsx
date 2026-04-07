@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Input, PrimaryButton, SecondaryButton, Label } from "@/components/FormComponents";
+import { tutorProfileAPI } from "@/lib/api";
+import { TutorEducationsRequest } from "@/types/api";
 
 interface EducationStepProps {
   tutorId: number | null;
@@ -13,18 +15,18 @@ interface Education {
   school: string;
   degree: string;
   fieldOfStudy: string;
-  graduationYear: string;
+  graduationYear: number;
 }
 
 export default function EducationStep({ tutorId, onNext, onSkip }: EducationStepProps) {
   const [educations, setEducations] = useState<Education[]>([
-    { school: "", degree: "", fieldOfStudy: "", graduationYear: "" },
+    { school: "", degree: "", fieldOfStudy: "", graduationYear: 0 },
   ]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleAdd = () => {
-    setEducations([...educations, { school: "", degree: "", fieldOfStudy: "", graduationYear: "" }]);
+    setEducations([...educations, { school: "", degree: "", fieldOfStudy: "", graduationYear: 0 }]);
   };
 
   const handleRemove = (index: number) => {
@@ -55,7 +57,7 @@ export default function EducationStep({ tutorId, onNext, onSkip }: EducationStep
         if (!edu.fieldOfStudy || edu.fieldOfStudy.trim().length < 2) {
           newErrors[`fieldOfStudy_${index}`] = "Field of study is required";
         }
-        const year = parseInt(edu.graduationYear);
+        const year = edu.graduationYear;
         if (!edu.graduationYear || isNaN(year) || year < 1950 || year > currentYear + 10) {
           newErrors[`graduationYear_${index}`] = `Year must be between 1950 and ${currentYear + 10}`;
         }
@@ -76,15 +78,14 @@ export default function EducationStep({ tutorId, onNext, onSkip }: EducationStep
     setLoading(true);
 
     try {
-      const response = await fetch("/api/tutor/education", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tutorId, educations }),
-      });
 
-      if (response.ok) {
-        onNext();
+      const educationRequest: TutorEducationsRequest = {
+        educations: educations
       }
+
+      await tutorProfileAPI.createTutorEducation(educationRequest, tutorId!);
+      onNext();
+      
     } catch (err) {
       console.error("Failed to save education:", err);
     } finally {

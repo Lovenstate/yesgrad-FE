@@ -31,18 +31,20 @@ export default function Login() {
         const tutorProfile = profileResult.data;
         
         // Store tutor info
-        localStorage.setItem('tutorId', String(tutorProfile.userId));
+        localStorage.setItem('userId', String(tutorProfile.userId));
+        localStorage.setItem('tutorId', String(tutorProfile.id));
         localStorage.setItem('onboardingStatus', tutorProfile.onboardingStatus);
         localStorage.setItem('profileCompletion', String(tutorProfile.profileCompletion));
         
         // Check if first login or incomplete profile
-        if (loginResult.data.isFirstLogin || tutorProfile.onboardingStatus !== 'FINISHED') {
+        if (loginResult.data.isFirstLogin) {
           window.location.href = '/tutor/onboarding';
         } else {
           window.location.href = '/tutor/dashboard';
         }
       } else if (loginResult.data.role === 'STUDENT') {
-        window.location.href = '/student/dashboard';
+        localStorage.setItem('emailVerified', String(loginResult.data.emailVerified));
+        window.location.href = loginResult.data.isFirstLogin ? '/student/onboarding' : '/student/dashboard';
       } else {
         setError('Unknown user role');
       }

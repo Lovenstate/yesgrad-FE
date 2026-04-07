@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { tutorProfileAPI } from "@/lib/api";
+import { TutorAvailabilityRequest } from "@/types/api";
 
 interface AvailabilityStepProps {
   tutorId: number | null;
@@ -46,16 +48,13 @@ export default function AvailabilityStep({ tutorId, onNext, onSkip }: Availabili
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const response = await fetch("/api/tutor/availability", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tutorId, availability: availability.filter((a) => a.isAvailable) }),
-      });
+    const tutorAvailabilityReq: TutorAvailabilityRequest = {
+      availabilities: availability.filter((a) => a.isAvailable)
+    };
 
-      if (response.ok) {
-        onNext();
-      }
+    try {
+      await tutorProfileAPI.createTutorAvailability(tutorAvailabilityReq, tutorId!);
+      onNext();
     } catch (err) {
       console.error("Failed to save availability:", err);
     } finally {

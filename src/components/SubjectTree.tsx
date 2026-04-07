@@ -25,6 +25,8 @@ function SubjectNode({ subject, level, selectedIds, onToggle }: SubjectNodeProps
   const [isExpanded, setIsExpanded] = useState(false);
   const hasChildren = subject.children.length > 0;
   const isSelected = selectedIds.includes(subject.id);
+  const isTopLevel = level === 0;
+  const isSelectable = !isTopLevel || !hasChildren;
 
   return (
     <div>
@@ -47,9 +49,12 @@ function SubjectNode({ subject, level, selectedIds, onToggle }: SubjectNodeProps
         
         <button
           type="button"
-          onClick={() => onToggle(subject.id)}
+          onClick={() => isSelectable && onToggle(subject.id)}
+          disabled={!isSelectable}
           className={`flex-1 text-left px-3 py-2 rounded-md text-sm font-medium transition-all ${
-            isSelected
+            !isSelectable
+              ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
+              : isSelected
               ? "bg-emerald-600 text-white shadow-sm"
               : "bg-white text-gray-700 border border-gray-300 hover:border-emerald-400 hover:shadow-sm"
           }`}
@@ -95,7 +100,7 @@ export default function SubjectTree({
   return (
     <div className="border border-gray-200 rounded-lg p-2 max-h-96 overflow-y-auto bg-white">
       <div className="text-xs text-gray-500 mb-2 px-3 py-1 bg-gray-50 rounded">
-        💡 Click ▶ to expand, click subject name to select
+        💡 Click ▶ to expand categories, then select specific subjects
       </div>
       {subjects.map((subject) => (
         <SubjectNode

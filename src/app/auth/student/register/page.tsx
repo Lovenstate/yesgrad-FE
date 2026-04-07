@@ -44,7 +44,7 @@ export default function StudentRegister() {
       // Redirect to onboarding after successful registration
       window.location.href = '/student/onboarding';
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Registration failed');
+      setError('Registration failed');
     } finally {
       setLoading(false);
     }

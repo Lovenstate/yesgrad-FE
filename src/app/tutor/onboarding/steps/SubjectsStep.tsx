@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import SubjectTree, { Subject } from "@/components/SubjectTree";
 import { Input, PrimaryButton, SecondaryButton, Label } from "@/components/FormComponents";
+import { tutorProfileAPI, subjectAPI } from "@/lib/api";
+import { TutorSubjectsRequest } from "@/types/api";
 
 interface SubjectsStepProps {
   tutorId: number | null;
@@ -25,10 +27,10 @@ export default function SubjectsStep({ tutorId, onNext, onSkip }: SubjectsStepPr
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await fetch("/api/subjects");
-        const result = await response.json();
-        if (result.success) {
-          setSubjects(result.data);
+        const response = await subjectAPI.getAllSubjects();
+      
+        if (response.success) {
+          setSubjects(response.data);
         }
       } catch (err) {
         console.error("Failed to load subjects:", err);
@@ -93,21 +95,16 @@ export default function SubjectsStep({ tutorId, onNext, onSkip }: SubjectsStepPr
     setLoading(true);
 
     try {
-      const payload = selectedSubjects.map((s) => ({
-        tutorId,
-        subjectId: s.subjectId,
-        hourlyRate: parseFloat(s.hourlyRate) || 0,
-      }));
-
-      const response = await fetch("/api/tutor/subjects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subjects: payload }),
-      });
-
-      if (response.ok) {
-        onNext();
+      const tutorSubjectRequest: TutorSubjectsRequest = {
+        subjects: selectedSubjects.map((s) => ({
+          subjectId: s.subjectId,
+          hourlyRate: parseFloat(s.hourlyRate) || 0,
+        }))
       }
+
+      await tutorProfileAPI.createTutorSubject(tutorSubjectRequest);
+      onNext();
+
     } catch (err) {
       console.error("Failed to save subjects:", err);
     } finally {

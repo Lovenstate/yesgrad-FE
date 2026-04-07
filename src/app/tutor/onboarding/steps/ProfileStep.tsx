@@ -92,7 +92,7 @@ export default function ProfileStep({ tutorId, onNext, onSkip }: ProfileStepProp
 
       const updateRequest: TutorProfileRequest = {
         bio: formData.bio,
-        headLine: formData.headline,
+        headline: formData.headline,
         cancellationPolicy: formData.cancellationPolicy,
         travelPolicy: formData.travelPolicy
       }

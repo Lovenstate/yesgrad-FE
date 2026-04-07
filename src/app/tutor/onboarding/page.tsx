@@ -5,6 +5,7 @@ import ProfileStep from "./steps/ProfileStep";
 import SubjectsStep from "./steps/SubjectsStep";
 import EducationStep from "./steps/EducationStep";
 import AvailabilityStep from "./steps/AvailabilityStep";
+import { tutorProfileAPI } from "@/lib/api";
 
 const STEPS = [
   { id: 1, name: "Profile", component: ProfileStep },
@@ -29,20 +30,19 @@ export default function TutorOnboarding() {
     if (currentStep < STEPS.length) {
       // Update status to STARTED on first step
       if (currentStep === 1) {
-        localStorage.setItem('onboardingStatus', 'STARTED');
+        updateOnboardingStatus('STARTED');
       }
       setCurrentStep(currentStep + 1);
     } else {
       // Mark as FINISHED when completing last step
-      localStorage.setItem('onboardingStatus', 'FINISHED');
-      localStorage.setItem('profileCompletion', '100');
+      updateOnboardingStatus('FINISHED');
       window.location.href = "/tutor/dashboard";
     }
   };
 
-  const handleSkip = () => {
-    // Mark as SKIPPED if user skips
-    localStorage.setItem('onboardingStatus', 'SKIPPED');
+  const handleSkip = async () => {
+    // Update backend to mark as SKIPPED
+    await updateOnboardingStatus('SKIPPED');
     
     if (currentStep < STEPS.length) {
       setCurrentStep(currentStep + 1);
@@ -51,8 +51,17 @@ export default function TutorOnboarding() {
     }
   };
 
-  const handleComplete = () => {
-    window.location.href = "/tutor/dashboard";
+  const updateOnboardingStatus = async (status: 'STARTED' | 'SKIPPED' | 'FINISHED') => {
+    try {
+      await tutorProfileAPI.updateProfile({ onboardingStatus: status });
+      localStorage.setItem('onboardingStatus', status);
+      
+      if (status === 'FINISHED') {
+        localStorage.setItem('profileCompletion', '100');
+      }
+    } catch (err) {
+      console.error('Failed to update onboarding status:', err);
+    }
   };
 
   const CurrentStepComponent = STEPS[currentStep - 1].component;

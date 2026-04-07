@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { authAPI } from '@/lib/api';
+import { useUnreadCount } from '@/hooks/useMessaging';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,24 +11,43 @@ export default function Header() {
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userName, setUserName] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [userId, setUserId] = useState<number | null>(null);
+  
+  const unreadCount = useUnreadCount(isLoggedIn ? userId : null);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // Check auth via API since cookie is HTTP-only
         const response = await fetch('http://localhost:8080/api/auth/me', {
           credentials: 'include'
         });
         if (response.ok) {
           const userData = await response.json();
+          const data = userData.data;
           setIsLoggedIn(true);
-          setUserRole(userData.data?.role || null);
-          setUserName(userData.data?.firstName || 'User');
-        } else {
+          setUserRole(data?.role || null);
+          setUserName(data?.firstName || 'User');
+          if (data?.id) {
+            setUserId(data.id);
+            localStorage.setItem('userId', String(data.id));
+          }
+          if (data?.emailVerified !== undefined) {
+            localStorage.setItem('emailVerified', String(data.emailVerified));
+          }
+        } else if (response.status === 401) {
+          const wasLoggedIn = !!localStorage.getItem('userId');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('tutorId');
+          localStorage.removeItem('emailVerified');
+          localStorage.removeItem('onboardingStatus');
           setIsLoggedIn(false);
           setUserRole(null);
+          // Only redirect from protected pages, not public ones
+          const protectedPaths = ['/student/', '/tutor/', '/student/onboarding'];
+          const isProtected = protectedPaths.some(p => window.location.pathname.startsWith(p));
+          if (wasLoggedIn && isProtected) window.location.href = '/auth/login';
         }
-      } catch (error) {
+      } catch {
         setIsLoggedIn(false);
         setUserRole(null);
       }
@@ -64,8 +84,13 @@ export default function Header() {
                 <Link href="/tutor/dashboard" className="px-4 py-2 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all font-medium">
                   Dashboard
                 </Link>
-                <Link href="/tutor/messages" className="px-4 py-2 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all font-medium">
+                <Link href="/tutor/messages" className="px-4 py-2 text-gray-700 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all font-medium relative">
                   Messages
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                      {unreadCount > 9 ? '9+' : unreadCount}
+                    </span>
+                  )}
                 </Link>
               </>
             ) : (
@@ -181,8 +206,13 @@ export default function Header() {
                   <Link href="/tutor/dashboard" className="px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-white rounded-lg transition-all font-medium">
                     Dashboard
                   </Link>
-                  <Link href="/tutor/messages" className="px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-white rounded-lg transition-all font-medium">
+                  <Link href="/tutor/messages" className="px-4 py-3 text-gray-700 hover:text-amber-600 hover:bg-white rounded-lg transition-all font-medium relative">
                     Messages
+                    {unreadCount > 0 && (
+                      <span className="absolute top-2 right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                        {unreadCount > 9 ? '9+' : unreadCount}
+                      </span>
+                    )}
                   </Link>
                 </>
               ) : (
