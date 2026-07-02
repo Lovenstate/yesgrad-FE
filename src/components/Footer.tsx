@@ -8,10 +8,10 @@ export default function Footer() {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-amber-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-[#1a237e] rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Y</span>
               </div>
-              <span className="text-xl font-bold">YesGrad</span>
+              <span className="text-xl font-bold"><span className="text-white">Yes</span><span className="text-[#f5a623]">Grad</span></span>
             </Link>
             <p className="text-gray-400 mb-4 max-w-md">
               Connect with qualified tutors for personalized learning. Achieve your academic goals with expert guidance and flexible scheduling.
@@ -39,11 +39,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/find-tutor" className="text-gray-400 hover:text-amber-300 transition-colors">Find a Tutor</Link></li>
-              <li><Link href="/become-tutor" className="text-gray-400 hover:text-emerald-300 transition-colors">Become a Tutor</Link></li>
-              <li><Link href="/subjects" className="text-gray-400 hover:text-amber-300 transition-colors">Subjects</Link></li>
-              <li><Link href="/pricing" className="text-gray-400 hover:text-orange-300 transition-colors">Pricing</Link></li>
-              <li><Link href="/resources" className="text-gray-400 hover:text-emerald-300 transition-colors">Free Resources</Link></li>
+              <li><Link href="/find-tutor" className="text-gray-400 hover:text-[#f5a623] transition-colors">Find a Tutor</Link></li>
+              <li><Link href="/become-tutor" className="text-gray-400 hover:text-[#f5a623] transition-colors">Become a Tutor</Link></li>
+              <li><Link href="/subjects" className="text-gray-400 hover:text-[#f5a623] transition-colors">Subjects</Link></li>
+              <li><Link href="/pricing" className="text-gray-400 hover:text-[#f5a623] transition-colors">Pricing</Link></li>
+              <li><Link href="/resources" className="text-gray-400 hover:text-[#f5a623] transition-colors">Free Resources</Link></li>
             </ul>
           </div>
 
@@ -51,11 +51,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
-              <li><Link href="/contact" className="text-gray-400 hover:text-amber-300 transition-colors">Contact Us</Link></li>
-              <li><Link href="/help" className="text-gray-400 hover:text-amber-300 transition-colors">Help Center</Link></li>
-              <li><Link href="/privacy" className="text-gray-400 hover:text-amber-300 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-gray-400 hover:text-amber-300 transition-colors">Terms of Service</Link></li>
-              <li><Link href="/events" className="text-gray-400 hover:text-amber-300 transition-colors">Events</Link></li>
+              <li><Link href="/contact" className="text-gray-400 hover:text-[#f5a623] transition-colors">Contact Us</Link></li>
+              <li><Link href="/help" className="text-gray-400 hover:text-[#f5a623] transition-colors">Help Center</Link></li>
+              <li><Link href="/privacy" className="text-gray-400 hover:text-[#f5a623] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-gray-400 hover:text-[#f5a623] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/events" className="text-gray-400 hover:text-[#f5a623] transition-colors">Events</Link></li>
             </ul>
           </div>
         </div>

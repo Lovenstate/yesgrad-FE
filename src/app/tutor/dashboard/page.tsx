@@ -42,7 +42,7 @@ export default function TutorDashboard() {
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Welcome back, {dashboard?.name}</h1>
               <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-gray-500">
                 <span className="flex items-center gap-1">
-                  <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg>
+                  <svg className="w-4 h-4 text-[#1a237e]" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" /></svg>
                   {dashboard?.hoursTutored ?? 0} hours tutored
                 </span>
                 <span className="hidden sm:inline text-gray-300">|</span>
@@ -53,10 +53,10 @@ export default function TutorDashboard() {
               </div>
             </div>
             <div className="flex gap-2">
-              <Link href="/tutor/profile" className="px-4 py-2 text-sm font-medium text-amber-600 border border-amber-600 rounded-lg hover:bg-amber-50 transition-colors">
+              <Link href="/tutor/profile" className="px-4 py-2 text-sm font-medium text-[#1a237e] border border-[#1a237e] rounded-lg hover:bg-blue-50 transition-colors">
                 View Profile
               </Link>
-              <Link href="/tutor/settings" className="px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
+              <Link href="/tutor/settings" className="px-4 py-2 text-sm font-medium text-white bg-[#1a237e] rounded-lg hover:bg-blue-900 transition-colors">
                 Settings
               </Link>
             </div>
@@ -65,17 +65,17 @@ export default function TutorDashboard() {
 
         {/* Direct Deposit Alert */}
         {!dashboard?.hasDirectDeposit && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5 text-[#1a237e]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="flex-1">
-              <p className="font-medium text-amber-800">Add your direct deposit details to get paid</p>
-              <p className="text-sm text-amber-700 mt-0.5">Deposits are processed on the 1st and 15th of each month.</p>
+              <p className="font-medium text-[#1a237e]">Add your direct deposit details to get paid</p>
+              <p className="text-sm text-blue-700 mt-0.5">Deposits are processed on the 1st and 15th of each month.</p>
             </div>
-            <Link href="/tutor/payment-settings" className="px-4 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors whitespace-nowrap">
+            <Link href="/tutor/payment-settings" className="px-4 py-2 bg-[#1a237e] text-white text-sm font-medium rounded-lg hover:bg-blue-900 transition-colors whitespace-nowrap">
               Add details
             </Link>
           </div>
@@ -84,9 +84,9 @@ export default function TutorDashboard() {
         {/* Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <StatCard label="Total Earnings" value={`$${(dashboard?.totalEarnings ?? 0).toFixed(2)}`} color="text-emerald-600" bg="bg-emerald-50" />
-          <StatCard label="Amount Paid" value={`$${(dashboard?.amountPaid ?? 0).toFixed(2)}`} color="text-blue-600" bg="bg-blue-50" />
-          <StatCard label="Amount Owed" value={`$${(dashboard?.amountOwed ?? 0).toFixed(2)}`} color="text-amber-600" bg="bg-amber-50" />
-          <StatCard label="Unread Messages" value={String(dashboard?.unreadMessages ?? 0)} color="text-purple-600" bg="bg-purple-50" />
+          <StatCard label="Amount Paid" value={`$${(dashboard?.amountPaid ?? 0).toFixed(2)}`} color="text-[#1a237e]" bg="bg-blue-50" />
+          <StatCard label="Amount Owed" value={`$${(dashboard?.amountOwed ?? 0).toFixed(2)}`} color="text-[#f5a623]" bg="bg-yellow-50" />
+          <StatCard label="Unread Messages" value={String(dashboard?.unreadMessages ?? 0)} color="text-[#1a237e]" bg="bg-blue-50" />
         </div>
 
         {/* Quick Actions */}
@@ -106,7 +106,7 @@ export default function TutorDashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">Upcoming Lessons</h2>
-              <Link href="/tutor/schedule" className="text-sm text-amber-600 hover:text-amber-700 font-medium">
+              <Link href="/tutor/schedule" className="text-sm text-[#1a237e] hover:text-blue-900 font-medium">
                 + Schedule
               </Link>
             </div>
@@ -130,7 +130,7 @@ export default function TutorDashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">Recent Lessons</h2>
-              <Link href="/tutor/submit" className="text-sm text-amber-600 hover:text-amber-700 font-medium">
+              <Link href="/tutor/submit" className="text-sm text-[#1a237e] hover:text-blue-900 font-medium">
                 + Submit
               </Link>
             </div>
@@ -171,7 +171,7 @@ export default function TutorDashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Availability</h2>
             <p className="text-sm text-gray-600 mb-4">Let students know when you're available for lessons to get more bookings.</p>
-            <Link href="/tutor/availability" className="inline-flex px-4 py-2 text-sm font-medium text-amber-600 border border-amber-600 rounded-lg hover:bg-amber-50 transition-colors">
+            <Link href="/tutor/availability" className="inline-flex px-4 py-2 text-sm font-medium text-[#1a237e] border border-[#1a237e] rounded-lg hover:bg-blue-50 transition-colors">
               Set your availability
             </Link>
           </div>
@@ -205,16 +205,16 @@ function StatCard({ label, value, color, bg }: { label: string; value: string; c
 
 function QuickAction({ href, icon, label }: { href: string; icon: string; label: string }) {
   return (
-    <Link href={href} className="bg-white border border-gray-200 rounded-xl p-4 text-center hover:border-amber-300 hover:shadow-sm transition-all group">
+    <Link href={href} className="bg-white border border-gray-200 rounded-xl p-4 text-center hover:border-blue-300 hover:shadow-sm transition-all group">
       <div className="text-2xl mb-1">{icon}</div>
-      <div className="text-sm font-medium text-gray-700 group-hover:text-amber-600 transition-colors">{label}</div>
+      <div className="text-sm font-medium text-gray-700 group-hover:text-[#1a237e] transition-colors">{label}</div>
     </Link>
   );
 }
 
 function LessonCard({ session: session, variant }: { session: Session; variant: 'upcoming' | 'recent' }) {
   const statusColors = variant === 'upcoming'
-    ? 'bg-amber-50 text-amber-700 border-amber-200'
+    ? 'bg-blue-50 text-[#1a237e] border-blue-200'
     : 'bg-emerald-50 text-emerald-700 border-emerald-200';
 
   const rawTime = session.startTime.split('.')[0];
