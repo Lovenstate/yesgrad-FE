@@ -112,7 +112,7 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
               />
             </div>
 
-            {/* Time Slots */
+            {/* Time Slots */}
             {selectedDate && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Available Times</label>
@@ -149,7 +149,7 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
               />
             </div>
 
-            {/* Summary */
+            {/* Summary */}
             {selectedSlot && (
               <div className="bg-blue-50 rounded-lg p-4 text-sm">
                 <div className="flex justify-between mb-1">
