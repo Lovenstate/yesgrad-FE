@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { tutorProfileAPI, API_BASE_URL } from '@/lib/api';
+import { tutorProfileAPI, resolveImageUrl } from '@/lib/api';
 import { TutorProfileRequest } from '@/types/api';
 
 type Section = 'photo' | 'education' | 'rates' | 'availability' | 'subjects' | 'languages';
@@ -61,7 +61,7 @@ export default function TutorProfile() {
 
         // Set photo
         if (data.profilePhotoUrl) {
-          setPhotoPreview(data.profilePhotoUrl);
+          setPhotoPreview(resolveImageUrl(data.profilePhotoUrl));
         }
         
         setHasChanges(false);
@@ -82,7 +82,7 @@ export default function TutorProfile() {
     try {
       setLoading(true);
       const response = await tutorProfileAPI.uploadPhoto(file);
-      setPhotoPreview(response.data);
+      setPhotoPreview(resolveImageUrl(response.data));
       alert('Photo uploaded successfully!');
     } catch (error) {
       console.error('Failed to upload photo:', error);

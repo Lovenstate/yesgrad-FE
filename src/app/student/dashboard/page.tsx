@@ -50,7 +50,7 @@ export default function StudentDashboard() {
               </h1>
               <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-gray-500">
                 <span className="flex items-center gap-1">
-                  <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-[#1a237e]" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" />
                   </svg>
                   {data?.totalHours ?? 0} hours learned
@@ -60,10 +60,10 @@ export default function StudentDashboard() {
               </div>
             </div>
             <div className="flex gap-2">
-              <Link href="/student/sessions" className="px-4 py-2 text-sm font-medium text-amber-600 border border-amber-600 rounded-lg hover:bg-amber-50 transition-colors">
+              <Link href="/student/sessions" className="px-4 py-2 text-sm font-medium text-[#1a237e] border border-[#1a237e] rounded-lg hover:bg-blue-50 transition-colors">
                 My Sessions
               </Link>
-              <Link href="/find-tutor" className="px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-lg hover:bg-amber-700 transition-colors">
+              <Link href="/find-tutor" className="px-4 py-2 text-sm font-medium text-white bg-[#1a237e] rounded-lg hover:bg-blue-900 transition-colors">
                 Find a Tutor
               </Link>
             </div>
@@ -83,7 +83,7 @@ export default function StudentDashboard() {
               <p className="font-medium text-blue-800">Please verify your email address</p>
               <p className="text-sm text-blue-700 mt-0.5">Check your inbox for a verification link to unlock all features.</p>
             </div>
-            <Link href="/auth/verify-email" className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
+            <Link href="/auth/verify-email" className="px-4 py-2 bg-[#1a237e] text-white text-sm font-medium rounded-lg hover:bg-blue-900 transition-colors whitespace-nowrap">
               Resend Email
             </Link>
           </div>
@@ -91,17 +91,17 @@ export default function StudentDashboard() {
 
         {/* Payment method banner */}
         {data && !data.hasPaymentMethod && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="flex-shrink-0 w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5 text-[#1a237e]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="flex-1">
-              <p className="font-medium text-amber-800">Add a payment method to book sessions</p>
-              <p className="text-sm text-amber-700 mt-0.5">Required before confirming any session with a tutor.</p>
+              <p className="font-medium text-[#1a237e]">Add a payment method to book sessions</p>
+              <p className="text-sm text-blue-700 mt-0.5">Required before confirming any session with a tutor.</p>
             </div>
-            <Link href="/student/wallet" className="px-4 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors whitespace-nowrap">
+            <Link href="/student/wallet" className="px-4 py-2 bg-[#1a237e] text-white text-sm font-medium rounded-lg hover:bg-blue-900 transition-colors whitespace-nowrap">
               Add Payment Method
             </Link>
           </div>
@@ -109,10 +109,10 @@ export default function StudentDashboard() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <StatCard label="Upcoming Sessions" value={String(upcoming.length)} color="text-amber-600" bg="bg-amber-50" />
+          <StatCard label="Upcoming Sessions" value={String(upcoming.length)} color="text-[#1a237e]" bg="bg-blue-50" />
           <StatCard label="Total Hours" value={String(data?.totalHours ?? 0)} color="text-emerald-600" bg="bg-emerald-50" />
-          <StatCard label="Sessions Completed" value={String(data?.totalSessions ?? 0)} color="text-blue-600" bg="bg-blue-50" />
-          <StatCard label="Active Tutors" value={String(data?.activeTutors ?? myTutors.length)} color="text-purple-600" bg="bg-purple-50" />
+          <StatCard label="Sessions Completed" value={String(data?.totalSessions ?? 0)} color="text-[#1a237e]" bg="bg-blue-50" />
+          <StatCard label="Active Tutors" value={String(data?.activeTutors ?? myTutors.length)} color="text-[#f5a623]" bg="bg-yellow-50" />
         </div>
 
         {/* Quick Actions */}
@@ -130,14 +130,14 @@ export default function StudentDashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">Upcoming Sessions</h2>
-              <Link href="/find-tutor" className="text-sm text-amber-600 hover:text-amber-700 font-medium">+ Book New</Link>
+              <Link href="/find-tutor" className="text-sm text-[#1a237e] hover:text-blue-900 font-medium">+ Book New</Link>
             </div>
             <div className="p-6">
               {upcoming.length > 0 ? (
                 <div className="space-y-3">
                   {upcoming.slice(0, 4).map(s => <SessionCard key={s.id} session={s} />)}
                   {upcoming.length > 4 && (
-                    <Link href="/student/sessions" className="block text-center text-sm text-amber-600 hover:text-amber-700 font-medium pt-2">
+                    <Link href="/student/sessions" className="block text-center text-sm text-[#1a237e] hover:text-blue-900 font-medium pt-2">
                       View all {upcoming.length} sessions →
                     </Link>
                   )}
@@ -156,7 +156,7 @@ export default function StudentDashboard() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">My Tutors</h2>
-              <Link href="/find-tutor" className="text-sm text-amber-600 hover:text-amber-700 font-medium">Find More</Link>
+              <Link href="/find-tutor" className="text-sm text-[#1a237e] hover:text-blue-900 font-medium">Find More</Link>
             </div>
             <div className="p-6">
               {myTutors.length > 0 ? (
@@ -164,7 +164,7 @@ export default function StudentDashboard() {
                   {myTutors.slice(0, 4).map(([tutorId, tutor]) => (
                     <div key={tutorId} className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0">
+                        <div className="w-10 h-10 bg-[#1a237e] rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0">
                           {tutor.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </div>
                         <div>
@@ -178,7 +178,7 @@ export default function StudentDashboard() {
                           Message
                         </Link>
                         <Link href={`/find-tutor/${tutorId}`}
-                          className="text-xs px-3 py-1.5 bg-amber-600 text-white rounded-md hover:bg-amber-700 transition-colors">
+                          className="text-xs px-3 py-1.5 bg-[#1a237e] text-white rounded-md hover:bg-blue-900 transition-colors">
                           Book
                         </Link>
                       </div>
@@ -224,9 +224,9 @@ function StatCard({ label, value, color, bg }: { label: string; value: string; c
 
 function QuickAction({ href, icon, label }: { href: string; icon: string; label: string }) {
   return (
-    <Link href={href} className="bg-white border border-gray-200 rounded-xl p-4 text-center hover:border-amber-300 hover:shadow-sm transition-all group">
+    <Link href={href} className="bg-white border border-gray-200 rounded-xl p-4 text-center hover:border-blue-300 hover:shadow-sm transition-all group">
       <div className="text-2xl mb-1">{icon}</div>
-      <div className="text-sm font-medium text-gray-700 group-hover:text-amber-600 transition-colors">{label}</div>
+      <div className="text-sm font-medium text-gray-700 group-hover:text-[#1a237e] transition-colors">{label}</div>
     </Link>
   );
 }
@@ -277,7 +277,7 @@ function EmptyState({ message, description, action }: { message: string; descrip
       </div>
       <p className="text-sm font-medium text-gray-900">{message}</p>
       <p className="text-xs text-gray-500 mt-1 mb-3">{description}</p>
-      <Link href={action.href} className="text-sm text-amber-600 hover:text-amber-700 font-medium">{action.label} →</Link>
+      <Link href={action.href} className="text-sm text-[#1a237e] hover:text-blue-900 font-medium">{action.label} →</Link>
     </div>
   );
 }

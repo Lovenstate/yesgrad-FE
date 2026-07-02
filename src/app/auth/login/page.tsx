@@ -64,10 +64,10 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
+          <h1 className="text-3xl font-extrabold text-[#1a237e]">Welcome Back</h1>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
         </div>
 
@@ -129,7 +129,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:opacity-50"
+            className="w-full bg-[#1a237e] text-white py-3 px-4 rounded-lg hover:bg-blue-900 transition-colors font-semibold disabled:opacity-50"
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
@@ -140,13 +140,13 @@ export default function Login() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Link 
               href="/auth/student/register" 
-              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-center font-medium"
+              className="flex-1 bg-[#1a237e] text-white py-2 px-4 rounded-lg hover:bg-blue-900 transition-colors text-center font-medium"
             >
               Join as Student
             </Link>
             <Link 
               href="/auth/tutor/register" 
-              className="flex-1 bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 transition-colors text-center font-medium"
+              className="flex-1 border-2 border-[#1a237e] text-[#1a237e] py-2 px-4 rounded-lg hover:bg-[#1a237e] hover:text-white transition-colors text-center font-medium"
             >
               Join as Tutor
             </Link>

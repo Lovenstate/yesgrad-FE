@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { studentAPI, subjectAPI, sessionAPI } from '@/lib/api';
+import { studentAPI, subjectAPI, sessionAPI, resolveImageUrl } from '@/lib/api';
 import { TutorSearchResult, SubjectNode, AvailableSlot, BookSessionRequest } from '@/types/api';
 
 // ─── Booking Modal ────────────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Session Requested!</h3>
             <p className="text-gray-500 mb-6">Your session request has been sent to {tutor.name}. You'll be notified once they confirm.</p>
-            <button onClick={onClose} className="bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 font-medium">
+            <button onClick={onClose} className="bg-[#1a237e] text-white px-6 py-2 rounded-lg hover:bg-blue-900 font-medium">
               Done
             </button>
           </div>
@@ -91,7 +91,7 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
               <select
                 value={subjectId ?? ''}
                 onChange={e => setSubjectId(Number(e.target.value))}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select subject</option>
                 {tutor.subjects.map((s, i) => (
@@ -108,11 +108,11 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
                 min={today}
                 value={selectedDate}
                 onChange={e => setSelectedDate(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            {/* Time Slots */}
+            {/* Time Slots */
             {selectedDate && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Available Times</label>
@@ -124,8 +124,8 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
                         onClick={() => setSelectedSlot(slot)}
                         className={`p-2 text-sm rounded-lg border transition-colors
                           ${selectedSlot === slot
-                            ? 'bg-amber-600 text-white border-amber-600'
-                            : 'border-gray-300 hover:border-amber-400 text-gray-700'}`}
+                            ? 'bg-[#1a237e] text-white border-[#1a237e]'
+                            : 'border-gray-300 hover:border-blue-400 text-gray-700'}`}
                       >
                         {slot.startTime}
                       </button>
@@ -145,13 +145,13 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
                 onChange={e => setNotes(e.target.value)}
                 placeholder="What do you need help with?"
                 rows={2}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            {/* Summary */}
+            {/* Summary */
             {selectedSlot && (
-              <div className="bg-amber-50 rounded-lg p-4 text-sm">
+              <div className="bg-blue-50 rounded-lg p-4 text-sm">
                 <div className="flex justify-between mb-1">
                   <span className="text-gray-600">Date</span>
                   <span className="font-medium">{selectedSlot.date}</span>
@@ -176,7 +176,7 @@ function BookingModal({ tutor, onClose }: { tutor: TutorSearchResult; onClose: (
             <button
               onClick={handleBook}
               disabled={!selectedSlot || !subjectId || loading}
-              className="w-full bg-amber-600 text-white py-3 rounded-lg font-semibold hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#1a237e] text-white py-3 rounded-lg font-semibold hover:bg-blue-900 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Booking...' : 'Request Session'}
             </button>
@@ -192,9 +192,9 @@ function TutorCard({ tutor, onBook }: { tutor: TutorSearchResult; onBook: () => 
   return (
     <div className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow p-6">
       <div className="flex items-start gap-4 mb-4">
-        <div className="w-14 h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+        <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0 overflow-hidden">
           {tutor.profilePhotoUrl
-            ? <img src={tutor.profilePhotoUrl} alt={tutor.name} className="w-full h-full rounded-full object-cover" />
+            ? <img src={resolveImageUrl(tutor.profilePhotoUrl)} alt={tutor.name} className="w-full h-full object-cover" />
             : tutor.name.split(' ').map(n => n[0]).join('')}
         </div>
         <div className="flex-1 min-w-0">
@@ -217,7 +217,7 @@ function TutorCard({ tutor, onBook }: { tutor: TutorSearchResult; onBook: () => 
 
       <div className="flex flex-wrap gap-1 mb-4">
         {tutor.subjects.slice(0, 3).map((s, i) => (
-          <span key={i} className="text-xs bg-amber-50 text-amber-700 px-2 py-1 rounded-full border border-amber-200">{s}</span>
+          <span key={i} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full border border-blue-200">{s}</span>
         ))}
         {tutor.subjects.length > 3 && (
           <span className="text-xs text-gray-400 px-2 py-1">+{tutor.subjects.length - 3} more</span>
@@ -228,7 +228,7 @@ function TutorCard({ tutor, onBook }: { tutor: TutorSearchResult; onBook: () => 
         <span className="text-xl font-bold text-gray-900">${tutor.hourlyRate}<span className="text-sm font-normal text-gray-500">/hr</span></span>
         <button
           onClick={onBook}
-          className="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors text-sm font-medium"
+          className="bg-[#1a237e] text-white px-4 py-2 rounded-lg hover:bg-blue-900 transition-colors text-sm font-medium"
         >
           Book Session
         </button>
@@ -285,10 +285,10 @@ export default function FindTutor() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Search */}
-      <section className="bg-gradient-to-br from-amber-50 to-orange-100 py-14">
+      <section className="bg-gradient-to-br from-blue-50 via-white to-blue-50 py-14">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">Find Your Perfect Tutor</h1>
+            <h1 className="text-4xl font-bold text-[#1a237e] mb-3">Find Your Perfect Tutor</h1>
             <p className="text-gray-600 text-lg">Browse qualified tutors and book sessions instantly</p>
           </div>
 
@@ -300,12 +300,12 @@ export default function FindTutor() {
                 value={filters.search}
                 onChange={e => setFilters({ ...filters, search: e.target.value })}
                 onKeyDown={e => e.key === 'Enter' && search()}
-                className="md:col-span-2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="md:col-span-2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               />
               <select
                 value={filters.subjectId}
                 onChange={e => setFilters({ ...filters, subjectId: e.target.value })}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">All Subjects</option>
                 {subjects.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
@@ -313,7 +313,7 @@ export default function FindTutor() {
               <select
                 value={filters.lessonFormat}
                 onChange={e => setFilters({ ...filters, lessonFormat: e.target.value })}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Any Format</option>
                 <option value="ONLINE">Online</option>
@@ -321,7 +321,7 @@ export default function FindTutor() {
               </select>
               <button
                 onClick={search}
-                className="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 font-semibold"
+                className="bg-[#1a237e] text-white px-6 py-3 rounded-lg hover:bg-blue-900 font-semibold"
               >
                 Search
               </button>
@@ -334,19 +334,19 @@ export default function FindTutor() {
                 placeholder="Min $"
                 value={filters.minPrice}
                 onChange={e => setFilters({ ...filters, minPrice: e.target.value })}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500"
+                className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="number"
                 placeholder="Max $"
                 value={filters.maxPrice}
                 onChange={e => setFilters({ ...filters, maxPrice: e.target.value })}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500"
+                className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
               />
               <select
                 value={filters.sortBy}
                 onChange={e => setFilters({ ...filters, sortBy: e.target.value as typeof filters.sortBy })}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500"
+                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
               >
                 <option value="rating">Sort: Top Rated</option>
                 <option value="price_asc">Sort: Price Low–High</option>
